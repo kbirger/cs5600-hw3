@@ -1,0 +1,32 @@
+/:
+total 2
+-rw-rw-r-- 1 root root  400 2009-11-19 00:43 another-file
+drwxrwxr-x 1 root root    0 2009-11-19 00:43 dir_other
+-rw-rw-r-- 1 root root 1800 2009-11-19 00:43 file.txt
+drwxrwxr-x 1 root root    0 2009-11-19 00:43 home
+drwxrwxr-x 1 root root    0 2009-11-19 00:43 work
+
+/dir_other:
+total 2
+-rw-rw-r-- 1 root root 1200 2009-11-19 00:43 big-2
+-rw-rw-r-- 1 root root  160 2009-11-19 00:43 small-6
+
+/home:
+total 2
+-rw-rw-r-- 1 root root 1200 2009-11-19 00:43 big-1
+-rw-rw-r-- 1 root root  216 2009-11-19 00:43 small-1
+-rw-rw-r-- 1 root root  144 2009-11-19 00:43 small-2
+
+/work:
+total 0
+drwxrwxr-x 1 root root 0 2009-11-19 00:43 dir-1
+drwxrwxr-x 1 root root 0 2009-11-19 00:43 dir-2
+
+/work/dir-1:
+total 2
+-rw-rw-r-- 1 root root 160 2009-11-19 00:43 small-3
+-rw-rw-r-- 1 root root 160 2009-11-19 00:43 small-4
+-rw-rw-r-- 1 root root 160 2009-11-19 00:43 small-5
+
+/work/dir-2:
+total 0
