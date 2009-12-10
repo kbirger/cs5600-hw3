@@ -274,9 +274,18 @@ static int hw3_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 */
 static int hw3_mknod(const char *path, mode_t mode, dev_t dev)
 {
-	if (!S_ISREG(mode))
-		return -EOPNOTSUPP;
-	return -EOPNOTSUPP;
+  if (!S_ISREG(mode)){
+    char dirent_buf[1024]; // get from somewhere
+    struct cs5600fs_dirent *dirent = (struct cs5600fs_dirent *)dirent_buf;
+    int ret = lookup(path, dirent);
+    if(ret != 0){
+      return ret;
+    }
+    
+    
+  }else{
+    return -EOPNOTSUPP;
+  }
 }
 
 static int getFat(struct cs5600fs_entry **fat) {
@@ -366,7 +375,7 @@ static int hw3_mkdir(const char *path, mode_t mode)
 */
 static int hw3_unlink(const char *path)
 {
-	return -EOPNOTSUPP;
+  return -EOPNOTSUPP;
 }
 
 /* rmdir - remove a directory
@@ -374,7 +383,9 @@ static int hw3_unlink(const char *path)
 */
 static int hw3_rmdir(const char *path)
 {
-	return -EOPNOTSUPP;
+  struct stat statbuf;
+  int ret = getattr(path, *statbuf);
+
 }
 
 /* rename - rename a file or directory
@@ -384,7 +395,8 @@ static int hw3_rmdir(const char *path)
 */
 static int hw3_rename(const char *src_path, const char *dst_path)
 {
-	return -EOPNOTSUPP;
+  //parse src to entry,
+  return -EOPNOTSUPP; 
 }
 
 /* chmod - change file permissions
@@ -392,7 +404,31 @@ static int hw3_rename(const char *src_path, const char *dst_path)
 */
 static int hw3_chmod(const char *path, mode_t mode)
 {
-	return -EOPNOTSUPP;
+  struct stat statbuf;
+  int ret = getattr(path, *statbuf);
+  struct cs5600fs_dirent *dirent = malloc(sizeof(struct cs5600fs_dirent));
+
+  //if there's something wrong (no file, no directory)
+  if(ret != 0){
+    //return the error
+    return ret;
+  }
+
+  //if the status buffer is read only
+  if(statbuf->mode is readonly){
+    //return the error
+    return EACCESS;
+
+  //otherwise
+  }else{
+    //change permissions
+    
+    //flush to ram
+    
+    //return happy
+    return 0;
+  }
+
 }
 
 /* chown - change owner and/or group
